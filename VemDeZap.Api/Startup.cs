@@ -16,11 +16,11 @@ namespace VemDeZap.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureAuthentication();
-            services.ConfigureMediatR();
-            services.ConfigureRepositories();
-            services.ConfigureSwagger();
-            services.ConfigureMVC();
+            //services.ConfigureMediatR();
+            //services.ConfigureRepositories();
+            //services.ConfigureSwagger();
+            //services.ConfigureAuthentication();
+            //services.ConfigureMVC();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,13 +38,12 @@ namespace VemDeZap.Api
                x.AllowAnyOrigin();
            });
 
-            app.UseMvc();
-
-            // Documentacao
-            app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "IloveCode - V1");
-            });
+            //app.UseMvc();
+            //// Documentacao
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c => {
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "IloveCode - V1");
+            //});
         }
     }
 }

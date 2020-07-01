@@ -7,6 +7,10 @@ namespace VemDeZap.Domain.Entidades
 {
     public class Usuario : EntityBase
     {
+        protected Usuario()
+        {
+
+        }
         public Usuario(string primeiroNome, string ultimoNome, string senha, string email)
         {
             PrimeiroNome = primeiroNome;

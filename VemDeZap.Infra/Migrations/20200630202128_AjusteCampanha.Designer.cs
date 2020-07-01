@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VemDeZap.Infra.Repositories.Base;
@@ -9,9 +10,10 @@ using VemDeZap.Infra.Repositories.Base;
 namespace VemDeZap.Infra.Migrations
 {
     [DbContext(typeof(VemDeZapContext))]
-    partial class VemDeZapContextModelSnapshot : ModelSnapshot
+    [Migration("20200630202128_AjusteCampanha")]
+    partial class AjusteCampanha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,25 +76,25 @@ namespace VemDeZap.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("CampanhaId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ContatoId")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("Enviado")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid?>("IdCampanha")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("IdContatos")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("IdGrupo")
+                    b.Property<Guid?>("GrupoId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCampanha");
+                    b.HasIndex("CampanhaId");
 
-                    b.HasIndex("IdContatos");
+                    b.HasIndex("ContatoId");
 
-                    b.HasIndex("IdGrupo");
+                    b.HasIndex("GrupoId");
 
                     b.ToTable("Envios");
                 });
@@ -175,15 +177,15 @@ namespace VemDeZap.Infra.Migrations
                 {
                     b.HasOne("VemDeZap.Domain.Entidades.Campanha", "Campanha")
                         .WithMany()
-                        .HasForeignKey("IdCampanha");
+                        .HasForeignKey("CampanhaId");
 
                     b.HasOne("VemDeZap.Domain.Entidades.Contato", "Contato")
                         .WithMany()
-                        .HasForeignKey("IdContatos");
+                        .HasForeignKey("ContatoId");
 
                     b.HasOne("VemDeZap.Domain.Entidades.Grupo", "Grupo")
                         .WithMany()
-                        .HasForeignKey("IdGrupo");
+                        .HasForeignKey("GrupoId");
                 });
 
             modelBuilder.Entity("VemDeZap.Domain.Entidades.Grupo", b =>

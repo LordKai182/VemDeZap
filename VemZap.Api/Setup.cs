@@ -7,14 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
-using VemDeZap.Api.Security;
 using VemDeZap.Domain.Commands.Usuario.Adicionarusuario;
 using VemDeZap.Domain.Interface.Repositories;
 using VemDeZap.Infra.Repositories;
 using VemDeZap.Infra.Repositories.Base;
 using VemDeZap.Infra.Repositories.Transactions;
+using VemZap.Api.Security;
 
-namespace VemDeZap.Api
+namespace VemZap.Api
 {
     public static class Setup
     {
@@ -102,9 +102,13 @@ namespace VemDeZap.Api
         {
             //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(Pipelines.MeasureTime<,>));
             //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(Pipelines.ValidateCommand<,>));
-
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly, typeof(AddUsuarioRequest).GetTypeInfo().Assembly);
-
+            //services.AddTransient<IRequestHandler<AddUsuarioHandler>>(sp =>
+            //{
+            //    return new AddUsuarioRequest();
+            //});
+            //services.AddMediatR(typeof(AddUsuarioRequest).GetTypeInfo().Assembly);
+             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly, typeof(AddUsuarioRequest).GetTypeInfo().Assembly);
+            //services.AddScoped(typeof(IUniversityRepository), typeof(UniversitySqlServerRepository));
 
         }
 
@@ -115,7 +119,7 @@ namespace VemDeZap.Api
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient<IRepositorieUsuario, RespositoryUsuario>();
-            // services.AddTransient<IRepositoryGrupo, RespositoryGrupo>();
+            services.AddTransient<IRepositoryGrupo, RepositoryGrupo>();
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)

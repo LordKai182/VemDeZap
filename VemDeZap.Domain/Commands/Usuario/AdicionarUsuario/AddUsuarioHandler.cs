@@ -26,7 +26,7 @@ namespace VemDeZap.Domain.Commands.Usuario.AdicionarUsuario
                 AddNotification("Request", "Informe os Dados do Usuario");
                 return new Response(this);
             }
-            if(_repositoryUsuario.Existe(x => x.Email == "teste@gmail.com"))
+            if(_repositoryUsuario.Existe(x => x.Email == request.Email))
             {
                 AddNotification("Usuario", "E-mail ja cadastrado");
                 return new Response(this);
